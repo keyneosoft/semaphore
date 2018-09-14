@@ -5,3 +5,6 @@ description: Semaphore is lightweight data type that is used for controlling acc
 homepage: https://github.com/mezoni/semaphore
 dev_dependencies:
   test: any
+
+environment:
+  sdk: '>=1.22.0 <3.0.0'
