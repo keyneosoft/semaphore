@@ -5,7 +5,7 @@ class GlobalSemaphore extends Semaphore {
   static final Map<String, GlobalSemaphore> _semaphores =
       <String, GlobalSemaphore>{};
 
-  factory GlobalSemaphore([String name]) {
+  factory GlobalSemaphore(String name) {
     var semaphore = _semaphores[name];
     if (semaphore == null) {
       semaphore = GlobalSemaphore._internal(name);
@@ -27,16 +27,13 @@ class LocalSemaphore extends Semaphore {
 abstract class Semaphore {
   final int maxCount;
 
-  final String name;
+  final String? name;
 
   int _currentCount = 0;
 
   final Queue<Completer> _waitQueue = Queue<Completer>();
 
   Semaphore._internal(this.maxCount, [this.name]) {
-    if (maxCount == null) {
-      throw ArgumentError.notNull('maxCount');
-    }
 
     if (maxCount < 1) {
       throw RangeError.value(maxCount, 'maxCount');

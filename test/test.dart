@@ -84,7 +84,7 @@ void main() {
     final maxCount = 3;
     Future action(List list, int milliseconds) {
       expect(list.length <= maxCount, true, reason: 'Not exlusive start');
-      list.length++;
+      list.add(Future<void>.value());
       final completer = Completer();
       Timer(Duration(milliseconds: milliseconds), () {
         expect(list.length <= maxCount, true, reason: 'Not exlusive end');

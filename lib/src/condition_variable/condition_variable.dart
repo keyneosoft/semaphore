@@ -3,9 +3,9 @@ part of '../../condition_variable.dart';
 class ConditionVariable {
   final Queue<Completer<void>> _readyQueue = Queue<Completer<void>>();
 
-  final Lock _lock;
+  final Lock lock;
 
-  ConditionVariable([this._lock]);
+  ConditionVariable(this.lock);
 
   Future<void> signal() async {
     if (_readyQueue.isNotEmpty) {
@@ -17,14 +17,10 @@ class ConditionVariable {
   Future<void> wait() async {
     final completer = Completer<void>();
     _readyQueue.add(completer);
-    if (_lock != null) {
-      _lock.release();
-    }
+    lock.release();
 
     await completer.future;
-    if (_lock != null) {
-      await _lock.acquire();
-    }
+    await lock.acquire();
   }
 
   Future<void> broadcast() async {
