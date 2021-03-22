@@ -13,3 +13,7 @@
 ## 0.1.1
 
 - Performed the modifications according to "pub.dartlang.org" suggestions.
+
+## 1.0.0
+
+- Migrate to null safety.
